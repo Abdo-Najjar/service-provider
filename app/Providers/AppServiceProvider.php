@@ -40,14 +40,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $visitor = App::make(Visitor::class);
+        // check if the laravel app using http requests to run the application.
+        if (! App::runningInConsole()) {
 
-        $visitor1 = App::make(Visitor::class);
-
-        dd($visitor, $visitor1);
-
-        if (!$visitor->isRecognise()) {
-            $visitor->rejester();
+            $visitor = App::make(Visitor::class);
+            
+            if (!$visitor->isRecognise()) {
+                $visitor->rejester();
+            }
         }
     }
 }
